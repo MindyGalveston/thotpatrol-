@@ -1,5 +1,4 @@
-# thotpatrol-
-Interpreter for the esoteric programming language thotpatrol
+
 
 
 thotpatrol 1.0
@@ -25,7 +24,7 @@ Anything before or after these lines will be ignored by the interpreter.
 A sample program might look like this. 
 _______________________________________________________________________________________________________________
 
-Mindy Galveston
+Chicken Man
 2/7/annodomini2017
 seems to be a program of some sort
 
@@ -53,7 +52,7 @@ Note that whitespace is disallowed in thaughties(Strings).
 The following program will also print Hello_world!
 _______________________________________________________________________________________________________________
 
-Mindy Galveston
+Chicken Man
 2/7/annodomini2017
 Prints Hello World!
 
@@ -87,7 +86,7 @@ all types and valid variable names must be capitalized. Below is a modified "Hel
 thaughty variable instead of a thaughty literal. 
 _______________________________________________________________________________________________________________
 
-Mindy Galveston
+Chicken Man
 2/8/annodomini2017
 Prints Hello World!
 
@@ -114,7 +113,7 @@ INTERROGATE     ==           Arguments must be of same type. Works for THOT and 
 👈               <            THOTTY
 🤜               >=           THOTTY
 🤛               <=           THOTTY
-👪               *	          THOTTY
+👪               *	     THOTTY
 🖖               /            THOTTY
 👏               +            THOTTY
 👻               -            THOTTY
@@ -171,7 +170,7 @@ Here is a program which successfully implements fizzbuzz
 
 _______________________________________________________________________________________________________________
 
-Mindy Galveston
+Chicken Man
 2/11/annodomini2017
 A simple fizzbuzz program
 
@@ -258,7 +257,7 @@ KAREN 🍑📧 ™123™
 ________________________________________________________________________________________________________
 
 filename: call.txt
-Mindy Galveston
+Chicken Man
 2/11/annodomimi2017
 
 A simple recursive counting program. Will display a countdown from 123 to 1.
@@ -305,6 +304,5 @@ KAREN 🍑📧 ©qwerty©
 
 
 _________________________________________________________________________________________________________
-
 
 
