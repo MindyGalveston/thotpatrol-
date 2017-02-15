@@ -373,12 +373,9 @@ public static void initializeNameTable(Hashtable<String, Boolean> table)
 
      public static Object evaluateValue(String tokens[], StateSystem s) {
 
-        /* for (String token : tokens) {
-             System.out.print(token + ",");
-         }*/
-       //  System.out.println("Tokens length is:" + tokens.length);
+
          if (tokens.length % 2 == 0) {
-         //    System.out.println(tokens.length);
+
              throw new CompilationException("syntax error on line: "+ s.pointer );
 
          }
@@ -474,129 +471,6 @@ public static void initializeNameTable(Hashtable<String, Boolean> table)
           }
          else throw new CompilationException("syntax error on line: "+ s.pointer );
      }
-        /*
-        if (tokens[1].equals("+"))
-        {
-            return (int)evaluateValue(Arrays.copyOf(tokens,1),s) + (int)evaluateValue(Arrays.copyOfRange(tokens,2,tokens.length),s);
-        }
-        else if (tokens[1].equals("-"))
-        {
-            return (int)evaluateValue(Arrays.copyOf(tokens,1),s) - (int)evaluateValue(Arrays.copyOfRange(tokens,2,tokens.length),s);
-        }
-        else if (tokens[1].equals("*"))
-        {
-            return (int)evaluateValue(Arrays.copyOf(tokens,1),s) * (int)evaluateValue(Arrays.copyOfRange(tokens,2,tokens.length),s);
-        }
-        else if (tokens[1].equals("/"))
-        {
-            return (int)evaluateValue(Arrays.copyOf(tokens,1),s) / (int)evaluateValue(Arrays.copyOfRange(tokens,2,tokens.length),s);
-        }
-        else if (tokens[1].equals("%"))
-        {
-            return (int)evaluateValue(Arrays.copyOf(tokens,1),s) % (int)evaluateValue(Arrays.copyOfRange(tokens,2,tokens.length),s);
-        }
-        else if (tokens[1].equals("and"))
-        {
-            return (boolean)evaluateValue(Arrays.copyOf(tokens,1),s) && (boolean)evaluateValue(Arrays.copyOfRange(tokens,2,tokens.length),s);
-        }
-        else if (tokens[1].equals("or"))
-        {
-            return (boolean)evaluateValue(Arrays.copyOf(tokens,1),s) || (boolean)evaluateValue(Arrays.copyOfRange(tokens,2,tokens.length),s);
-        }
-        else if (tokens[1].equals("equals"))
-        {
-            return evaluateValue(Arrays.copyOf(tokens,1),s).equals(evaluateValue(Arrays.copyOfRange(tokens,2,tokens.length),s));
-        }
-       else throw new CompilationException("syntax error on line: "+ s.pointer );
-    }*/
-
-
-  /*  public static boolean evaluateTruth(String truth, StateSystem s) { // temporarily frozen for re-evalutation
-        //loop through till first interrogate
-        //if INTERROGATE found return evaluateTruth(a).equals()
-        //loop through for CONSPIRATOR if found
-
-
-        String[] tokens = truth.split("\\s+");
-        if (!tokens[1].equals("INTERROGATE")) throw new CompilationException("syntax error on line: "+ s.pointer );
-
-        if (!s.nameUtilization.get(tokens[0])) {
-            throw new CompilationException("syntax error on line: "+ s.pointer );
-        }
-        if (s.thaughties.containsKey(tokens[0])) {
-
-            if (tokens[2].startsWith("©") && tokens[2].endsWith("©")) {
-                return tokens[2].substring(1, tokens[2].length() - 1).equals(s.thaughties.get(tokens[0]));
-            } else if (s.thaughties.containsKey(tokens[2])) {
-                return s.thaughties.get(tokens[2]).equals(s.thaughties.get(tokens[0]));
-            } else {
-                throw new CompilationException("syntax error on line: "+ s.pointer );
-            }
-
-
-        } else if (s.thaughties.containsKey(tokens[2])) {
-
-            if (tokens[0].startsWith("©") && tokens[0].endsWith("©")) {
-                if (tokens[0].substring(1, tokens[0].length() - 1).equals(s.thaughties.get(tokens[2]))) return true;
-                else return false;
-            } else if (s.thaughties.containsKey(tokens[0])) {
-                if (s.thaughties.get(tokens[0]).equals(s.thaughties.get(tokens[2]))) return true;
-                else return false;
-            } else {
-                throw new CompilationException("syntax error on line: "+ s.pointer );
-            }
-
-
-        } else if (s.thotties.containsKey(tokens[0])) {
-
-            if (tokens[2].startsWith("™") && tokens[2].endsWith("™")) {
-                return Integer.parseInt(tokens[2].substring(1, tokens[2].length() - 1)) == (s.thotties.get(tokens[0]));
-            } else if (s.thotties.containsKey(tokens[2])) {
-                return Objects.equals(s.thotties.get(tokens[2]), s.thotties.get(tokens[0]));
-            } else {
-                throw new CompilationException("syntax error on line: "+ s.pointer );
-            }
-
-
-        } else if (s.thotties.containsKey(tokens[2])) {
-
-            if (tokens[0].startsWith("™") && tokens[0].endsWith("™")) {
-                return Integer.parseInt(tokens[0].substring(1, tokens[0].length() - 1)) == s.thotties.get(tokens[2]);
-            } else if (s.thotties.containsKey(tokens[0])) {
-                return ((Objects.equals(s.thotties.get(tokens[0]), s.thotties.get(tokens[2]))));
-
-            } else {
-                throw new CompilationException("syntax error on line: "+ s.pointer );
-            }
-
-
-        } else if (s.thots.containsKey(tokens[0])) {
-            if (tokens[2].equals("✔")) {
-                return ((s.thots.get(tokens[0])));
-            } else if (tokens[2].equals("❌")) {
-                return !(s.thots.get(tokens[0]));
-            } else if (s.thots.containsKey(tokens[2])) {
-                return Objects.equals(s.thots.get(tokens[2]), s.thots.get(tokens[0]));
-            } else {
-                throw new CompilationException("syntax error on line: "+ s.pointer );
-            }
-
-
-        } else if (s.thots.containsKey(tokens[2])) {
-            if (tokens[0].equals("✔")) {
-                return (s.thots.get(tokens[2]));
-            } else if (tokens[2].equals("❌")) {
-                return !(s.thots.get(tokens[2]));
-            } else if (s.thots.containsKey(tokens[0])) {
-                return Objects.equals(s.thots.get(tokens[0]), s.thots.get(tokens[2]));
-            } else {
-                throw new CompilationException("syntax error on line: "+ s.pointer );
-            }
-
-
-        }
-        else throw new CompilationException("syntax error on line: "+ s.pointer );
-    }*/
 
 
     public static int containsToken(String token, String[] tokens)
