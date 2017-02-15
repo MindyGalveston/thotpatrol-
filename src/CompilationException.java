@@ -13,6 +13,9 @@ public class CompilationException extends RuntimeException{
     {
         System.out.println(config);
     }
+    public CompilationException(){}
+
+
 
 
 }

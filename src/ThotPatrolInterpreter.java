@@ -34,7 +34,6 @@ public static void runProgram(String programFile,StateSystem s )
         String file =  "";
         while (fileScan.hasNextLine())
         {
-
           file = file + fileScan.nextLine() + "\n";
         }
         file = tokenizeLiterals(file);
@@ -49,7 +48,7 @@ public static void runProgram(String programFile,StateSystem s )
             }
        }catch(Exception E)
         {
-            throw new CompilationException("syntax error on line: " + Integer.toString(internal.pointer) + "\n" + lines[s.pointer]);
+            throw new CompilationException("Line " +internal.pointer + " has generated an exception.\nLine " + internal.pointer + ": "+program[internal.pointer] );
         }
 
 
@@ -123,12 +122,12 @@ private static void resolveFlowStructure(String[] program, Hashtable<Integer, In
                     jumpIndices.put(index,i);
                     jumpIndices.put(i, index);
                 }
-                else throw new CompilationException("syntax error on line: "+ i );
+                else throw new CompilationException( );
 
             }
             catch (ArrayIndexOutOfBoundsException E)
             {
-                throw new CompilationException("syntax error on line: "+ i );
+                throw new CompilationException( );
             }
         }
         else if(commands[0].equals("\uD83C\uDFA7INTERCEPT") && commands[1].equals("MALIGNANT") && commands[2].equals("COMMUNICATIONS\uD83C\uDFA7"))
@@ -144,12 +143,12 @@ private static void resolveFlowStructure(String[] program, Hashtable<Integer, In
                     jumpIndices.put(index,i);
                     jumpIndices.put(i, index);
                 }
-                else throw new CompilationException("syntax error on line: "+ i );
+                else throw new CompilationException( );
 
             }
             catch (ArrayIndexOutOfBoundsException E)
             {
-                throw new CompilationException("syntax error on line: "+ i );
+                throw new CompilationException();
             }
         }
     }
@@ -191,7 +190,7 @@ public static void execute( String command, StateSystem s) {
                 }
                 else
                 {
-                    throw new CompilationException("syntax error on line: "+ s.pointer);
+                    throw new CompilationException();
                 }
             } else if (tokens[1].equals("THOTTY")) {
                 String name = (String)evaluateValue(Arrays.copyOfRange(tokens,2,tokens.length),s);
@@ -202,7 +201,7 @@ public static void execute( String command, StateSystem s) {
                 }
                 else
                 {
-                    throw new CompilationException("syntax error on line: "+ s.pointer);
+                    throw new CompilationException();
                 }
             } else if (tokens[1].equals("THOT")) {
                 String name = (String)evaluateValue(Arrays.copyOfRange(tokens,2,tokens.length),s);
@@ -212,10 +211,10 @@ public static void execute( String command, StateSystem s) {
                 }
                 else
                 {
-                    throw new CompilationException("syntax error on line: "+ s.pointer);
+                    throw new CompilationException();
                 }
             } else {
-                throw new CompilationException("syntax error on line: "+ s.pointer );
+                throw new CompilationException( );
             }
             break;
         case("\uD83D\uDD75") :
@@ -237,7 +236,7 @@ public static void execute( String command, StateSystem s) {
                 }
                 else
                 {
-                    throw new CompilationException("syntax error on line: "+ s.pointer );
+                    throw new CompilationException( );
                 }
             }
             else if(tokens[1].equals("\uD83C\uDF51\uD83D\uDCE7"))
@@ -260,7 +259,7 @@ public static void execute( String command, StateSystem s) {
                 }
 
             }
-            else throw new CompilationException("syntax error on line: "+ s.pointer);
+            else throw new CompilationException();
         break;
         case("🎧INTERCEPT") :
 
@@ -281,7 +280,7 @@ public static void execute( String command, StateSystem s) {
                             s.thotties.remove(tokens[2]);
                             s.nameUtilization.put(tokens[2], false );
                         }
-                        else throw new CompilationException("syntax error on line: " + s.pointer);
+                        else throw new CompilationException();
                     break;
                     case ("THOT") :
                         if (s.thots.containsKey(tokens[2]))
@@ -289,7 +288,7 @@ public static void execute( String command, StateSystem s) {
                             s.thots.remove(tokens[2]);
                             s.nameUtilization.put(tokens[2], false );
                         }
-                        else throw new CompilationException("syntax error on line: " + s.pointer);
+                        else throw new CompilationException();
                         break;
                     case ("THAUGHTY") :
                         if (s.thaughties.containsKey(tokens[2]))
@@ -297,13 +296,13 @@ public static void execute( String command, StateSystem s) {
                             s.thaughties.remove(tokens[2]);
                             s.nameUtilization.put(tokens[2], false );
                         }
-                        else throw new CompilationException("syntax error on line: " + s.pointer);
+                        else throw new CompilationException();
                         break;
                 }
             }
             else
             {
-                throw new CompilationException("syntax error on line: "+ s.pointer);
+                throw new CompilationException();
             }
             break;
         case("\uD83D\uDC50"):
@@ -317,7 +316,7 @@ public static void execute( String command, StateSystem s) {
                 {
                     if(!s.nameUtilization.get(tokens[0]))
                     {
-                        throw new CompilationException("syntax error on line: "+ s.pointer );
+                        throw new CompilationException( );
                     }
                     if(s.thaughties.containsKey(tokens[0]))
                     {
@@ -350,7 +349,7 @@ public static void execute( String command, StateSystem s) {
                 }
                 catch (NullPointerException E)
                 {
-                    throw new CompilationException("syntax error on line: "+ s.pointer );
+                    throw new CompilationException( );
                 }
         }
 
@@ -376,7 +375,7 @@ public static void initializeNameTable(Hashtable<String, Boolean> table)
 
          if (tokens.length % 2 == 0) {
 
-             throw new CompilationException("syntax error on line: "+ s.pointer );
+             throw new CompilationException( );
 
          }
          if (tokens.length == 1) {
@@ -397,7 +396,7 @@ public static void initializeNameTable(Hashtable<String, Boolean> table)
                  return true;
              } else if (tokens[0].equals("\uD83C\uDE32")) {
                  return false;
-             } else throw new CompilationException("syntax error on line: "+ s.pointer );
+             } else throw new CompilationException( );
 
          }
 
@@ -469,7 +468,7 @@ public static void initializeNameTable(Hashtable<String, Boolean> table)
               output = output + temp;
               return output;
           }
-         else throw new CompilationException("syntax error on line: "+ s.pointer );
+         else throw new CompilationException( );
      }
 
 
