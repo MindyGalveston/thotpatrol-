@@ -22,7 +22,8 @@ First from the start menu type cmd and open command prompt!
 Type: cd <path to folder with interpreter>
 
 now type the following command: java -jar thotpatrol.jar <name of code file>
-"Hello World!", should be printed in the console!
+The output of your program will be printed in the console, and the program will be able to recieve input through the
+console.
 
 Now that you know how to use the interpreter, let's get programming!
 
