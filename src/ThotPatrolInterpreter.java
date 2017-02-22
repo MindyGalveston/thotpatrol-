@@ -48,6 +48,7 @@ public static void runProgram(String programFile,StateSystem s )
             }
        }catch(Exception E)
         {
+            E.printStackTrace();
             throw new CompilationException("Line " +internal.pointer + " has generated an exception.\nLine " + internal.pointer + ": "+program[internal.pointer] );
         }
 
@@ -181,21 +182,25 @@ public static void execute( String command, StateSystem s) {
     }
     switch (tokens[0]) {
         case("\uD83D\uDCA6DM\uD83D\uDCA6"):
+            String name = dereferenceThaughty(tokens[2],s);
+
+
+
             if (tokens[1].equals("THAUGHTY")) {
 
-                String name = (String)evaluateValue(Arrays.copyOfRange(tokens,2,tokens.length),s);
-                if (!s.nameUtilization.containsKey(name)) {
+                if (!s.nameUtilization.get(name))
+                {
                     s.nameUtilization.put(name, true);
                     s.thaughties.put(name, "");
+
                 }
                 else
                 {
                     throw new CompilationException();
                 }
             } else if (tokens[1].equals("THOTTY")) {
-                String name = (String)evaluateValue(Arrays.copyOfRange(tokens,2,tokens.length),s);
 
-                if (!s.nameUtilization.containsKey(name)) {
+                if (!s.nameUtilization.get(name)) {
                     s.nameUtilization.put(name, true);
                     s.thotties.put(name, 0);
                 }
@@ -204,8 +209,7 @@ public static void execute( String command, StateSystem s) {
                     throw new CompilationException();
                 }
             } else if (tokens[1].equals("THOT")) {
-                String name = (String)evaluateValue(Arrays.copyOfRange(tokens,2,tokens.length),s);
-                if (!s.nameUtilization.containsKey(name)) {
+                if (!s.nameUtilization.get(name)) {
                     s.nameUtilization.put(name, true);
                     s.thots.put(name, false);
                 }
@@ -218,21 +222,22 @@ public static void execute( String command, StateSystem s) {
             }
             break;
         case("\uD83D\uDD75") :
-            if(tokens[1].equals("\uD83D\uDCE7\uD83C\uDF46") && s.nameUtilization.get(tokens[2]))
+             name = dereferenceThaughty(tokens[2],s);
+            if(tokens[1].equals("\uD83D\uDCE7\uD83C\uDF46") && s.nameUtilization.get(name))
             {
-                if(s.thaughties.containsKey(tokens[2])) {
+                if(s.thaughties.containsKey(name)) {
                 Scanner sc = new Scanner(System.in);
-                s.thaughties.put(tokens[2],sc.nextLine().toUpperCase());
+                s.thaughties.put(name,sc.nextLine().toUpperCase());
                 }
-                else if (s.thotties.containsKey(tokens[2]))
+                else if (s.thotties.containsKey(name))
                 {
                     Scanner sc = new Scanner(System.in);
-                    s.thotties.put(tokens[2],Integer.parseInt(sc.nextLine()));
+                    s.thotties.put(name,Integer.parseInt(sc.nextLine()));
                 }
-                else if (s.thots.containsKey(tokens[2]))
+                else if (s.thots.containsKey(name))
                 {
                     Scanner sc = new Scanner(System.in);
-                    s.thots.put(tokens[2],Boolean.parseBoolean(sc.nextLine()));
+                    s.thots.put(name,Boolean.parseBoolean(sc.nextLine()));
                 }
                 else
                 {
@@ -272,29 +277,30 @@ public static void execute( String command, StateSystem s) {
             break;
 
         case ("NAUGHTY") :
+             name = dereferenceThaughty(tokens[2],s);
             if(tokens.length == 3) {
                 switch (tokens[1]) {
                     case ("THOTTY") :
-                        if (s.thotties.containsKey(tokens[2]))
+                        if (s.thotties.containsKey(name))
                         {
-                            s.thotties.remove(tokens[2]);
-                            s.nameUtilization.put(tokens[2], false );
+                            s.thotties.remove(name);
+                            s.nameUtilization.put(name, false );
                         }
                         else throw new CompilationException();
                     break;
                     case ("THOT") :
-                        if (s.thots.containsKey(tokens[2]))
+                        if (s.thots.containsKey(name))
                         {
-                            s.thots.remove(tokens[2]);
-                            s.nameUtilization.put(tokens[2], false );
+                            s.thots.remove(name);
+                            s.nameUtilization.put(name, false );
                         }
                         else throw new CompilationException();
                         break;
                     case ("THAUGHTY") :
-                        if (s.thaughties.containsKey(tokens[2]))
+                        if (s.thaughties.containsKey(name))
                         {
-                            s.thaughties.remove(tokens[2]);
-                            s.nameUtilization.put(tokens[2], false );
+                            s.thaughties.remove(name);
+                            s.nameUtilization.put(name, false );
                         }
                         else throw new CompilationException();
                         break;
@@ -314,33 +320,35 @@ public static void execute( String command, StateSystem s) {
             default:
                 try
                 {
-                    if(!s.nameUtilization.get(tokens[0]))
+
+                     name = dereferenceThaughty(tokens[0],s);
+                    if(!s.nameUtilization.get(name))
                     {
                         throw new CompilationException( );
                     }
-                    if(s.thaughties.containsKey(tokens[0]))
+                    if(s.thaughties.containsKey(name))
                     {
                         if (tokens[1].equals("\uD83C\uDF51\uD83D\uDCE7"))
                         {
 
-                                s.thaughties.put(tokens[0], (String)evaluateValue(Arrays.copyOfRange(tokens,2,tokens.length),s));
+                                s.thaughties.put(name, (String)evaluateValue(Arrays.copyOfRange(tokens,2,tokens.length),s));
 
                         }
 
                     }
-                    else if (s.thotties.containsKey(tokens[0]))
+                    else if (s.thotties.containsKey(name))
                     {
                         if (tokens[1].equals("\uD83C\uDF51\uD83D\uDCE7")) {
 
-                            s.thotties.put(tokens[0], (int) evaluateValue(Arrays.copyOfRange(tokens, 2, tokens.length), s));
+                            s.thotties.put(name, (int) evaluateValue(Arrays.copyOfRange(tokens, 2, tokens.length), s));
 
                         }
                     }
-                    else if (s.thots.containsKey(tokens[0]))
+                    else if (s.thots.containsKey(name))
                     {
                         if (tokens[1].equals("\uD83C\uDF51\uD83D\uDCE7"))
                         {
-                           s.thots.put(tokens[0],(boolean)evaluateValue(Arrays.copyOfRange(tokens, 2, tokens.length), s));
+                           s.thots.put(name,(boolean)evaluateValue(Arrays.copyOfRange(tokens, 2, tokens.length), s));
                         }
 
                     }
@@ -357,13 +365,21 @@ public static void execute( String command, StateSystem s) {
 
 public static void initializeNameTable(Hashtable<String, Boolean> table)
 {
+
     try{
-        String file = new Scanner(new File("thotNames.txt"),"UTF-16").useDelimiter("\\Z").next();
-        String[] lines = file.split("\r\n");
-    for(String s : lines )
+        System.out.println("Initializing Name Table...");
+       Scanner fileScan =  new Scanner(new File("thotNames.txt"),"UTF-16");
+        String file = "";
+        while (fileScan.hasNextLine()) {
+            file = file + fileScan.nextLine() + "\n";
+        }
+        String lines[] = file.split("\\r?\\n");
+        fileScan.close();
+    for(String s : lines)
     {
     table.put(s, false);
-    }}catch ( Exception E)
+    }
+    }catch ( Exception E)
     {
         System.out.println("NAME FILE READ FAILED");
     }
@@ -396,7 +412,11 @@ public static void initializeNameTable(Hashtable<String, Boolean> table)
                  return true;
              } else if (tokens[0].equals("\uD83C\uDE32")) {
                  return false;
+             } else if (tokens[0].startsWith("\uD83D\uDC41\u200D\uD83D\uDDE8") && tokens[0].endsWith("\uD83D\uDC41\u200D\uD83D\uDDE8")) {
+                String[] val = {dereferenceThaughty(tokens[0], s)};
+                 return evaluateValue(val, s);
              } else throw new CompilationException( );
+
 
          }
 
@@ -511,6 +531,21 @@ public static void initializeNameTable(Hashtable<String, Boolean> table)
         String output = literal.replace("token_SPACE", " ");
          output = output.replace("token_NEWLINE","\n");
          return output;
+
+    }
+    public static String dereferenceThaughty(String argument, StateSystem s)
+    {
+        if(argument.startsWith("\uD83D\uDC41\u200D\uD83D\uDDE8") && argument.endsWith("\uD83D\uDC41\u200D\uD83D\uDDE8"))
+        {
+            argument = argument.replaceFirst("\uD83D\uDC41\u200D\uD83D\uDDE8" , "");
+            argument = argument.substring(0, argument.indexOf("👁‍🗨"));
+            if(s.thaughties.containsKey(argument))
+            {
+                return s.thaughties.get(argument);
+            }
+            else throw new CompilationException();
+        }
+        else return argument;
 
     }
 
