@@ -1,0 +1,38 @@
+
+
+
+
+
+
+
+1.01 added dereference operator + errorfixing (THOTPATROL 1.XX SCHEMA FINALIZED)
+__________________________________________________________________________________________________________
+
+Interpreter changes
+___________________
+Thaughties can now be dereferenced, allowing for programmatic construction of variable names.
+
+Caught a massive fault in the name table initialization, it has now been corrected.
+
+Fixed an error regarding whitespace on empty line.
+ 
+Miscelaneous changes
+____________________
+
+Dereferencing section added to Instructions.txt
+
+Sample programs folder created, with some sample programs
+
+Added release Notes folder
+
+
+General notes
+______________
+There will be no further changes to the definition of the language itself during in any subsequent
+update of thotpatrol 1.X. All existing code should remain compatible with updated sample code.
+_________________________________________________________________________________________________________
+
+1.0 initial release (SCHEMA NOT FINALIZED)
+____________________________________________________________________________________________________________
+basic functionality added
+____________________________________________________________________________________________________________

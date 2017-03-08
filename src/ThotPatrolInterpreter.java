@@ -48,7 +48,7 @@ public static void runProgram(String programFile,StateSystem s )
             }
        }catch(Exception E)
         {
-            E.printStackTrace();
+
             throw new CompilationException("Line " +internal.pointer + " has generated an exception.\nLine " + internal.pointer + ": "+program[internal.pointer] );
         }
 
@@ -100,6 +100,7 @@ private static void resolveFlowStructure(String[] program, Hashtable<Integer, In
     for (int i = 0; i <  program.length; i++)
     {
         String[] commands = program[i].split("\\s+");
+        if (commands.length < 1 ) continue;
         if(commands[0].equals("\uD83D\uDE0EBRIEF\uD83D\uDE0E"))
         {
             referenceStack.add(i);
@@ -168,7 +169,12 @@ public static void execute( String command, StateSystem s) {
         }
     }
     String[] tokens = command.split("\\s+");
-    if(tokens[0].equals(""))return;
+
+
+    if (tokens.length == 0) return;
+    if(tokens[0].trim().equals("")) return;
+
+
     if (tokens[0].equals("\uD83E\uDD37"))
     {
         try {
