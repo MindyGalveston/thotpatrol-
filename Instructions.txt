@@ -18,8 +18,7 @@ Let's get programming!
 First, make a new text file using notepad in the same directory as the thotpatrol executable. Save this
 textfile, and make absolutely sure the encoding is UNICODE. THis corresponds to UTF-16LE, and is critically important for sucessful operation. 
 
-
-To use the executable, open cmd from the start and navigate to the directory containing the executable. THe code files must also be in this directory. The navigation command is as follows:
+To use the executable on windows, open cmd from the start menu and navigate to the directory containing the executable. The code files must also be in this directory. The navigation command is as follows:
 
 cd <path to directory>
 
